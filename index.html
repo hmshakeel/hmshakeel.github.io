@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Hafiz Muhammad Shakeel | AI & Machine Learning Expert</title>
+    <title>Dr. Hafiz Muhammad Shakeel | AI Research Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -19,6 +20,7 @@
             --gradient-end: #2c3e50;
             --card-bg: rgba(255, 255, 255, 0.95);
             --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --tab-height: 70px;
         }
 
         * {
@@ -36,10 +38,6 @@
             overflow-x: hidden;
         }
 
-        .monospace {
-            font-family: 'Roboto Mono', monospace;
-        }
-
         .container {
             width: 90%;
             max-width: 1200px;
@@ -47,103 +45,184 @@
             padding: 0 20px;
         }
 
+        /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
-            padding: 2rem 0;
-            position: relative;
-            overflow: hidden;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .header-content {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 2;
         }
 
-        .profile-image {
-            width: 180px;
-            height: 180px;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-tabs {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-tabs li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-tabs a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-tabs a:hover, .nav-tabs a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-tabs a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-tabs a.active::after, .nav-tabs a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: var(--tab-height);
+            min-height: calc(100vh - var(--tab-height));
+        }
+
+        .tab-content {
+            display: none;
+            padding: 3rem 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Tab */
+        #home {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%233498db" fill-opacity="0.1" d="M0,224L48,213.3C96,203,192,181,288,160C384,139,480,117,576,122.7C672,128,768,160,864,170.7C960,181,1056,171,1152,165.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: contain;
+        }
+
+        .hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-image {
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             border: 5px solid rgba(255, 255, 255, 0.3);
-            background: #2c3e50;
+            background: var(--dark);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 2rem;
             color: white;
             font-size: 4rem;
             font-weight: bold;
+            box-shadow: var(--shadow);
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
         }
 
-        .title {
-            font-size: 1.5rem;
+        .hero .title {
+            font-size: 1.8rem;
+            color: var(--secondary);
             margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
         }
 
         .social-links {
             display: flex;
+            justify-content: center;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .social-link {
-            color: white;
-            background: rgba(255, 255, 255, 0.2);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            background: var(--secondary);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
             transition: all 0.3s ease;
+            box-shadow: var(--shadow);
         }
 
         .social-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            background: var(--accent);
         }
 
-        .header-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23000000' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,160C384,139,480,117,576,122.7C672,128,768,160,864,170.7C960,181,1056,171,1152,165.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: center;
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        section:nth-child(even) {
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+        /* Section Headings */
+        .section-title {
             text-align: center;
-            color: var(--dark);
+            margin-bottom: 3rem;
             position: relative;
             padding-bottom: 1rem;
         }
 
-        h2::after {
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -155,6 +234,7 @@
             border-radius: 2px;
         }
 
+        /* Card Styles */
         .card {
             background: var(--card-bg);
             border-radius: 10px;
@@ -183,12 +263,21 @@
             margin-bottom: 0.5rem;
         }
 
-        .interests-grid {
+        /* Grid Layouts */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Interest Items */
         .interest-item {
             background: var(--card-bg);
             padding: 1.5rem;
@@ -205,21 +294,9 @@
             border-left: 4px solid var(--accent);
         }
 
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category h3 {
-            color: var(--dark);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--secondary);
-        }
-
+        /* Skills Section */
         .skill-item {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .skill-name {
@@ -242,12 +319,7 @@
             transition: width 1s ease-in-out;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
+        /* Project Cards */
         .project-card {
             background: var(--card-bg);
             border-radius: 10px;
@@ -274,47 +346,7 @@
             margin-bottom: 1rem;
         }
 
-        .publications-list {
-            list-style: none;
-        }
-
-        .publication-item {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .publication-item:last-child {
-            border-bottom: none;
-        }
-
-        .pub-title {
-            font-weight: 500;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .pub-authors {
-            color: #666;
-            font-style: italic;
-            margin-bottom: 0.5rem;
-        }
-
-        .pub-journal {
-            color: var(--secondary);
-            font-weight: 500;
-        }
-
-        .pub-impact {
-            display: inline-block;
-            background: var(--success);
-            color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 3px;
-            font-size: 0.8rem;
-            margin-left: 0.5rem;
-        }
-
+        /* Timeline */
         .timeline {
             position: relative;
             max-width: 1200px;
@@ -375,23 +407,104 @@
             box-shadow: var(--shadow);
         }
 
-        .timeline-content h3 {
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
+        /* Publications */
+        .publication-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
         }
 
-        .timeline-content .date {
-            color: var(--accent);
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+
+        .pub-title {
             font-weight: 500;
+            color: var(--dark);
             margin-bottom: 0.5rem;
         }
 
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 2rem 0;
+        .pub-authors {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 0.5rem;
         }
 
+        .pub-journal {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .pub-impact {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
         footer {
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
@@ -418,13 +531,28 @@
             opacity: 0.8;
         }
 
+        /* Responsive Design */
         @media screen and (max-width: 768px) {
-            h1 {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .nav-tabs {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-tabs li {
+                margin: 0.5rem;
+            }
+            
+            .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .title {
-                font-size: 1.2rem;
+            .hero .title {
+                font-size: 1.5rem;
             }
             
             .timeline::after {
@@ -445,373 +573,406 @@
                 left: 0;
             }
             
-            .interests-grid,
-            .skills-container,
-            .projects-grid {
+            .grid-2, .grid-3 {
                 grid-template-columns: 1fr;
             }
         }
 
-        .animated-border {
-            position: relative;
-            z-index: 0;
-            border-radius: 10px;
-            overflow: hidden;
-            padding: 2px;
-        }
-        
-        .animated-border::before {
-            content: '';
-            position: absolute;
-            z-index: -2;
-            left: -50%;
-            top: -50%;
-            width: 200%;
-            height: 200%;
-            background-color: transparent;
-            background-repeat: no-repeat;
-            background-size: 50% 50%, 50% 50%;
-            background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-            background-image: linear-gradient(#3498db, #3498db), linear-gradient(#e74c3c, #e74c3c), linear-gradient(#3498db, #3498db), linear-gradient(#e74c3c, #e74c3c);
-            animation: rotate 4s linear infinite;
-        }
-        
-        .animated-border::after {
-            content: '';
-            position: absolute;
-            z-index: -1;
-            left: 2px;
-            top: 2px;
-            width: calc(100% - 4px);
-            height: calc(100% - 4px);
-            background: white;
-            border-radius: 8px;
-        }
-        
-        @keyframes rotate {
-            100% {
-                transform: rotate(1turn);
-            }
+        /* Animation for skill bars */
+        @keyframes progressBar {
+            0% { width: 0; }
+            100% { width: attr(data-width); }
         }
     </style>
 </head>
 <body>
+    <!-- Header with Navigation Tabs -->
     <header>
-        <div class="header-bg"></div>
         <div class="container">
             <div class="header-content">
-                <div class="profile-image">HS</div>
-                <h1>Hafiz Muhammad Shakeel</h1>
-                <div class="title">PhD in Computer Science & AI Researcher</div>
-                <div class="social-links">
-                    <a href="#" class="social-link">in</a>
-                    <a href="#" class="social-link">G</a>
-                    <a href="#" class="social-link">@</a>
-                </div>
-                <p>AI-Driven Predictive Analytics | Machine Learning | Energy Informatics | Explainable AI</p>
+                <div class="logo">HMS<span>Lab</span></div>
+                <ul class="nav-tabs">
+                    <li><a href="#home" class="nav-link active" data-tab="home">Home</a></li>
+                    <li><a href="#research" class="nav-link" data-tab="research">Research</a></li>
+                    <li><a href="#education" class="nav-link" data-tab="education">Education</a></li>
+                    <li><a href="#experience" class="nav-link" data-tab="experience">Experience</a></li>
+                    <li><a href="#skills" class="nav-link" data-tab="skills">Skills</a></li>
+                    <li><a href="#projects" class="nav-link" data-tab="projects">Projects</a></li>
+                    <li><a href="#publications" class="nav-link" data-tab="publications">Publications</a></li>
+                    <li><a href="#contact" class="nav-link" data-tab="contact">Contact</a></li>
+                </ul>
             </div>
         </div>
     </header>
 
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="card">
-                <p>I am a dedicated researcher and lecturer specializing in Artificial Intelligence, Machine Learning, and Data Science. My research focuses on developing AI-driven solutions for energy efficiency, healthcare diagnostics, and explainable AI systems. With a strong academic background and professional experience in both industry and academia, I am passionate about leveraging technology to solve real-world problems.</p>
-                <p>My PhD research at the University of Huddersfield explored AI-driven predictive analytics and interactive visualization to enhance energy efficiency in residential buildings, for which I was awarded the Smart House Scholarship.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="research">
-        <div class="container">
-            <h2>Research Interests</h2>
-            <div class="interests-grid">
-                <div class="interest-item">Artificial Intelligence</div>
-                <div class="interest-item">Machine Learning</div>
-                <div class="interest-item">Data Science</div>
-                <div class="interest-item">Energy Informatics</div>
-                <div class="interest-item">Human-Centred Computing</div>
-                <div class="interest-item">Explainable AI</div>
-                <div class="interest-item">Health Informatics</div>
-                <div class="interest-item">Mental Health Informatics</div>
-                <div class="interest-item">Automation</div>
-                <div class="interest-item">Agentic Modelling</div>
-                <div class="interest-item">Agentic AI</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="education">
-        <div class="container">
-            <h2>Education</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>PhD in Computer Science & Informatics</h3>
-                        <div class="date">2021 – 2025</div>
-                        <p>University of Huddersfield, United Kingdom</p>
-                        <p><strong>Thesis:</strong> AI-Driven Predictive Analytics and Interactive Visualisation to Enhance Energy Efficiency in Residential Buildings</p>
-                        <p><strong>Achievement:</strong> Scholarship Winner of the Smart House Project</p>
+    <!-- Main Content -->
+    <main>
+        <!-- Home Tab -->
+        <section id="home" class="tab-content active">
+            <div class="container">
+                <div class="hero">
+                    <div class="hero-image">HS</div>
+                    <h1>Hafiz Muhammad Shakeel</h1>
+                    <div class="title">PhD in Computer Science & AI Researcher</div>
+                    <p>Specializing in AI-Driven Predictive Analytics, Machine Learning, and Energy Informatics with a passion for developing explainable AI systems that solve real-world problems.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                     </div>
+                    <a href="#contact" class="btn nav-link" data-tab="contact">Get in Touch</a>
                 </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>MEng in Energy & Environmental Engineering</h3>
-                        <div class="date">2017 – 2019</div>
-                        <p>University of the Punjab, Pakistan</p>
-                        <p><strong>Thesis:</strong> Simulation-Guided, Cost-Effective Indoor Intelligent Energy Management System using Machine Learning Techniques</p>
-                        <p><strong>Achievement:</strong> Gold Medalist</p>
+            </div>
+        </section>
+
+        <!-- Research Interests Tab -->
+        <section id="research" class="tab-content">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Research Interests</h2>
+                    <p>Areas of expertise and ongoing research focus</p>
+                </div>
+                <div class="grid grid-3">
+                    <div class="interest-item">
+                        <i class="fas fa-brain fa-2x"></i>
+                        <h3>Artificial Intelligence</h3>
                     </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>BEng in Electrical Engineering</h3>
-                        <div class="date">2009 – 2014</div>
-                        <p>University of the Punjab, Lahore, Pakistan</p>
-                        <p><strong>Thesis:</strong> Three-Phase Smart Multi-Functional Digital Energy Meter</p>
-                        <p><strong>Achievement:</strong> Government Scholarship Winner</p>
+                    <div class="interest-item">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                        <h3>Machine Learning</h3>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-database fa-2x"></i>
+                        <h3>Data Science</h3>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-bolt fa-2x"></i>
+                        <h3>Energy Informatics</h3>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-users fa-2x"></i>
+                        <h3>Human-Centred Computing</h3>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-eye fa-2x"></i>
+                        <h3>Explainable AI</h3>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="experience">
-        <div class="container">
-            <h2>Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Research Officer in AI (Postdoc)</h3>
-                        <div class="date">Nov 2024 – Present</div>
-                        <p>Leeds Beckett University, UK</p>
-                        <p>NHS Diagnostic Pipelines using AI and Digital Technologies</p>
-                    </div>
+        <!-- Education Tab -->
+        <section id="education" class="tab-content">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Education</h2>
+                    <p>Academic background and qualifications</p>
                 </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Lecturer in Computer Science</h3>
-                        <div class="date">Jan 2025 – Present</div>
-                        <p>Leeds Beckett University, UK</p>
-                        <p>Applied Machine Learning, Object Oriented Programming</p>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>PhD in Computer Science & Informatics</h3>
+                            <div class="date">2021 – 2025</div>
+                            <p>University of Huddersfield, United Kingdom</p>
+                            <p><strong>Thesis:</strong> AI-Driven Predictive Analytics and Interactive Visualisation to Enhance Energy Efficiency in Residential Buildings</p>
+                            <p><strong>Achievement:</strong> Scholarship Winner of the Smart House Project</p>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Lecturer in Artificial Intelligence</h3>
-                        <div class="date">Sep 2024 – Oct 2024</div>
-                        <p>University of Huddersfield, UK</p>
-                        <p>Introduction to Artificial Intelligence</p>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>MEng in Energy & Environmental Engineering</h3>
+                            <div class="date">2017 – 2019</div>
+                            <p>University of the Punjab, Pakistan</p>
+                            <p><strong>Thesis:</strong> Simulation-Guided, Cost-Effective Indoor Intelligent Energy Management System using Machine Learning Techniques</p>
+                            <p><strong>Achievement:</strong> Gold Medalist</p>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Lecturer/Tutor in Computing & Math</h3>
-                        <div class="date">Jan 2023 – Oct 2024</div>
-                        <p>Study Group, University of Huddersfield, UK</p>
-                        <p>Various courses including Computer Networks, Discrete Mathematics, and Web Development</p>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>BEng in Electrical Engineering</h3>
+                            <div class="date">2009 – 2014</div>
+                            <p>University of the Punjab, Lahore, Pakistan</p>
+                            <p><strong>Thesis:</strong> Three-Phase Smart Multi-Functional Digital Energy Meter</p>
+                            <p><strong>Achievement:</strong> Government Scholarship Winner</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="skills">
-        <div class="container">
-            <h2>Technical Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Python</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>C++</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85%"></div>
+        <!-- Experience Tab -->
+        <section id="experience" class="tab-content">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Professional Experience</h2>
+                    <p>Career journey and professional positions</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Research Officer in AI (Postdoc)</h3>
+                            <div class="date">Nov 2024 – Present</div>
+                            <p>Leeds Beckett University, UK</p>
+                            <p>NHS Diagnostic Pipelines using AI and Digital Technologies</p>
                         </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>JavaScript</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>SQL</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90%"></div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Lecturer in Computer Science</h3>
+                            <div class="date">Jan 2025 – Present</div>
+                            <p>Leeds Beckett University, UK</p>
+                            <p>Applied Machine Learning, Object Oriented Programming</p>
                         </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>R</span>
-                            <span>75%</span>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Lecturer in Artificial Intelligence</h3>
+                            <div class="date">Sep 2024 – Oct 2024</div>
+                            <p>University of Huddersfield, UK</p>
+                            <p>Introduction to Artificial Intelligence</p>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="75%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Tab -->
+        <section id="skills" class="tab-content">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Technical Skills</h2>
+                    <p>Programming languages, tools and technologies</p>
+                </div>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Programming Languages</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Python</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>C++</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>JavaScript</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>SQL</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Tools & Technologies</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Streamlit</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Tableau</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Power BI</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Jupyter Notebook</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Streamlit</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Tableau</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Power BI</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Jupyter Notebook</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="95%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>SPSS</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-width="75%"></div>
-                        </div>
-                    </div>
+                <div class="card">
+                    <h3>Skill Distribution</h3>
+                    <canvas id="skillsRadar" height="300"></canvas>
                 </div>
             </div>
-            
-            <div class="chart-container">
-                <canvas id="skillsRadar"></canvas>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projects">
-        <div class="container">
-            <h2>Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>XAI-Driven Diagnostic Framework for Energy Performance</h3>
-                        <p>Developed an explainable AI framework to investigate the predictive power of building features on Energy Performance Certificate ratings in detached houses.</p>
-                    </div>
+        <!-- Projects Tab -->
+        <section id="projects" class="tab-content">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Featured Projects</h2>
+                    <p>Selected research and development projects</p>
                 </div>
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Collaborative Smart Housing Energy Analytics Platform</h3>
-                        <p>Applied advanced analytics and machine learning to develop a scalable platform supporting smart home energy management and stakeholder collaboration.</p>
+                <div class="grid grid-2">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>XAI-Driven Diagnostic Framework for Energy Performance</h3>
+                            <p>Developed an explainable AI framework to investigate the predictive power of building features on Energy Performance Certificate ratings in detached houses.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3>Mental Health Support Mapping in the UK</h3>
-                        <p>Created a web-based tool to visualize mental health support availability in relation to pharmacy locations, improving healthcare accessibility insights.</p>
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Collaborative Smart Housing Energy Analytics Platform</h3>
+                            <p>Applied advanced analytics and machine learning to develop a scalable platform supporting smart home energy management and stakeholder collaboration.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Mental Health Support Mapping in the UK</h3>
+                            <p>Created a web-based tool to visualize mental health support availability in relation to pharmacy locations, improving healthcare accessibility insights.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Intelligent Energy Management System</h3>
+                            <p>Designed and implemented a simulation-guided, cost-effective indoor intelligent energy management system using machine learning techniques.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="publications">
-        <div class="container">
-            <h2>Selected Publications</h2>
-            <ul class="publications-list">
-                <li class="publication-item">
-                    <div class="pub-title">An XAI-Driven Diagnostic Framework to Investigate the Predictive Power of Building Features to Enhance EPC Ratings in Detached Houses</div>
-                    <div class="pub-authors">HM Shakeel, S Iram, R Hill, HMA Farid, P Brown, HU Rehman</div>
-                    <div class="pub-journal">Energy and Buildings, 2025 <span class="pub-impact">IF: 7.1</span></div>
-                </li>
-                <li class="publication-item">
-                    <div class="pub-title">Linear and Tree-Based Intelligent Investigation of Cross-Domain Housing Features to Enhance Energy Efficiency</div>
-                    <div class="pub-authors">HM Shakeel, S Iram, HMA Farid, R Hill</div>
-                    <div class="pub-journal">Advanced Intelligent Systems, 2025 <span class="pub-impact">IF: 6.8</span></div>
-                </li>
-                <li class="publication-item">
-                    <div class="pub-title">A Machine Learning Based Intelligent Framework for Predicting Energy Efficiency in Next-Generation Residential Buildings</div>
-                    <div class="pub-authors">HM Shakeel, S Iram, R Hill, HMA Farid, A S Akbar, F Saleem</div>
-                    <div class="pub-journal">Buildings, 2025 <span class="pub-impact">IF: 3.2</span></div>
-                </li>
-            </ul>
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="#" class="btn">View All Publications</a>
+        <!-- Publications Tab -->
+        <section id="publications" class="tab-content">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Selected Publications</h2>
+                    <p>Research papers and academic publications</p>
+                </div>
+                <div class="card">
+                    <div class="publication-item">
+                        <div class="pub-title">An XAI-Driven Diagnostic Framework to Investigate the Predictive Power of Building Features to Enhance EPC Ratings in Detached Houses</div>
+                        <div class="pub-authors">HM Shakeel, S Iram, R Hill, HMA Farid, P Brown, HU Rehman</div>
+                        <div class="pub-journal">Energy and Buildings, 2025 <span class="pub-impact">IF: 7.1</span></div>
+                    </div>
+                    <div class="publication-item">
+                        <div class="pub-title">Linear and Tree-Based Intelligent Investigation of Cross-Domain Housing Features to Enhance Energy Efficiency</div>
+                        <div class="pub-authors">HM Shakeel, S Iram, HMA Farid, R Hill</div>
+                        <div class="pub-journal">Advanced Intelligent Systems, 2025 <span class="pub-impact">IF: 6.8</span></div>
+                    </div>
+                    <div class="publication-item">
+                        <div class="pub-title">A Machine Learning Based Intelligent Framework for Predicting Energy Efficiency in Next-Generation Residential Buildings</div>
+                        <div class="pub-authors">HM Shakeel, S Iram, R Hill, HMA Farid, A S Akbar, F Saleem</div>
+                        <div class="pub-journal">Buildings, 2025 <span class="pub-impact">IF: 3.2</span></div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="#" class="btn">View All Publications</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="achievements">
-        <div class="container">
-            <h2>Achievements & Awards</h2>
-            <div class="interests-grid">
-                <div class="interest-item">International PhD Week 2024 at Trier University of Applied Sciences by DAAD, Germany</div>
-                <div class="interest-item">Smart House Scholarship, University of Huddersfield (2021–2024)</div>
-                <div class="interest-item">Gold Medal Winner, University of the Punjab, Pakistan (2019)</div>
-                <div class="interest-item">First Position in MEng Batch, University of the Punjab (2019)</div>
-                <div class="interest-item">Graduate Student Fellowship, University of Punjab (2017)</div>
-                <div class="interest-item">Laptop Award under Chief Minister Laptop Scheme (2011)</div>
-                <div class="interest-item">Highest Marks Graduate Student Scholarship (2009)</div>
+        <!-- Contact Tab -->
+        <section id="contact" class="tab-content">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Me</h2>
+                    <p>Get in touch for collaboration or inquiries</p>
+                </div>
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Contact Information</h3>
+                        <div class="contact-info" style="justify-content: flex-start;">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>hmshakeel.567@gmail.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>07576294082</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-linkedin"></i>
+                                <span>hafiz-muhammad-shakeel-4637aa105</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-google"></i>
+                                <span>Google Scholar: Hafiz Muhammad Shakeel</span>
+                            </div>
+                        </div>
+                        <div class="map" style="height: 300px; background: #eee; border-radius: 8px; margin-top: 2rem; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-map-marker-alt fa-3x"></i>
+                            <span style="margin-left: 10px;">Leeds, United Kingdom</span>
+                        </div>
+                    </div>
+                    <div class="contact-form card">
+                        <h3>Send a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
-            <h2>Contact Me</h2>
             <div class="contact-info">
                 <div class="contact-item">
-                    <span>📧</span>
+                    <i class="fas fa-envelope"></i>
                     <span>hmshakeel.567@gmail.com</span>
                 </div>
                 <div class="contact-item">
-                    <span>📱</span>
+                    <i class="fas fa-phone"></i>
                     <span>07576294082</span>
                 </div>
                 <div class="contact-item">
-                    <span>🔗</span>
+                    <i class="fab fa-linkedin"></i>
                     <span>LinkedIn: hafiz-muhammad-shakeel-4637aa105</span>
-                </div>
-                <div class="contact-item">
-                    <span>📊</span>
-                    <span>Google Scholar: Hafiz Muhammad Shakeel</span>
                 </div>
             </div>
             <div class="copyright">
@@ -821,8 +982,57 @@
     </footer>
 
     <script>
-        // Animate skill bars on scroll
+        // Tab navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            // Function to switch tabs
+            function switchTab(tabName) {
+                // Hide all tab contents
+                tabContents.forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Show the selected tab content
+                document.getElementById(tabName).classList.add('active');
+                
+                // Update active navigation link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('data-tab') === tabName) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Update URL hash
+                window.location.hash = tabName;
+            }
+            
+            // Add click event to all navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tabName = this.getAttribute('data-tab');
+                    switchTab(tabName);
+                    
+                    // Scroll to top
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Check URL hash on page load
+            if(window.location.hash) {
+                const tabName = window.location.hash.substring(1);
+                if(document.getElementById(tabName)) {
+                    switchTab(tabName);
+                }
+            }
+            
+            // Animate skill bars on scroll
             const skillBars = document.querySelectorAll('.skill-progress');
             
             const observer = new IntersectionObserver((entries) => {
@@ -874,6 +1084,16 @@
                     }
                 }
             });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if(contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message. I will get back to you soon!');
+                    this.reset();
+                });
+            }
         });
     </script>
 </body>

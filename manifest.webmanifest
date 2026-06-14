@@ -1,0 +1,9 @@
+{
+  "name": "Dr Hafiz Muhammad Shakeel Portfolio",
+  "short_name": "HMS Portfolio",
+  "description": "Academic portfolio for AI, prediction modelling and health informatics.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#09141d"
+}
